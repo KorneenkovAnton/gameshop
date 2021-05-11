@@ -1,0 +1,17 @@
+<taglib>
+
+    <tlib-version>1.0</tlib-version>
+    <jsp-version>2.0</jsp-version>
+    <short-name>cur</short-name>
+
+    <tag>
+        <name>currency</name>
+        <tag-class>com.epam.gameshop.tag.CurrencyParserTag</tag-class>
+        <body-content>scriptless</body-content>
+        <attribute>
+            <name>lan</name>
+
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+</taglib>
