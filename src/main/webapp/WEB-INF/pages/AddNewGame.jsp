@@ -22,7 +22,7 @@
     <form action="/addGame" method="post" id="addGame" class="row g-3">
         <div class="col-12">
             <label class="form-label" for="name"><fmt:message key="text.name" bundle="${bundle}"/> </label>
-            <input id="name" class="form-control" type="text" required="required" name="name" pattern="^[a-zA-Z ,-:0-9]+$"/>
+            <input id="name" class="form-control" type="text" required="required" name="name" pattern="^[a-zA-Z ,-:0-9]+$" size="45"/>
         </div>
         <div class="col-md-6">
             <label class="form-label" for="desc"><fmt:message key="text.cost" bundle="${bundle}"/> </label>
@@ -39,7 +39,7 @@
         </div>
         <div class="col-12">
             <label for="desc" class="form-label"><fmt:message key="text.dev" bundle="${bundle}"/> </label>
-            <input id="dev" class="form-control" type="text" name="developer" required="required" pattern="^[a-zA-Z0-9]+$"/>
+            <input id="dev" class="form-control" type="text" name="developer" required="required" pattern="^[a-zA-Z0-9 \p{P}]+$" size="45"/>
         </div>
 
         <label><fmt:message key="text.min_sys_req" bundle="${bundle}"/></label><br/><br/>
@@ -48,11 +48,11 @@
             <div class="col-12">
                 <label class="form-label" for="operSysMin"><fmt:message key="text.OS" bundle="${bundle}"/> </label>
                 <input class="form-control" id="operSysMin" type="text" name="operation_systemMin" required="required"
-                       pattern="^[a-zA-Z 0-9]+$"/>
+                       pattern="^[a-zA-Z 0-9 \p{P}]+$" size="45"/>
             </div>
             <div class="col-md-6">
                 <label class="form-label" for="cpuNameMin"><fmt:message key="text.cpu_name" bundle="${bundle}"/></label>
-                <input class="form-control" id="cpuNameMin" type="text" name="cpu_nameMin" required="required" pattern="^[a-zA-Z 0-9]+$"/>
+                <input class="form-control" id="cpuNameMin" type="text" name="cpu_nameMin" required="required" pattern="^[a-zA-Z 0-9 \p{P}]+$" size="45"/>
             </div>
             <div class="col-md-6">
                 <label class="form-label" for="cpruFreqMin"><fmt:message key="text.cpu_freq" bundle="${bundle}"/> </label>
@@ -66,7 +66,7 @@
             <div class="col-md-6">
                 <label class="form-label" for="adapterNameMin"><fmt:message key="text.video_adapter_name" bundle="${bundle}"/> </label>
                 <input class="form-control" id="adapterNameMin" type="text" name="video_adapter_nameMin" required="required"
-                       pattern="^[a-zA-Z 0-9]+$"/>
+                       pattern="^[a-zA-Z 0-9 \p{P}]+$" size="45"/>
             </div>
             <div class="col-md-6">
                 <label class="form-label" for="adapterMemMin"><fmt:message key="text.video_adapter_memory" bundle="${bundle}"/> </label>
@@ -84,11 +84,11 @@
         <div class="recSys">
             <div class="col-12">
                 <label for="ip1" class="form-label"><fmt:message key="text.OS" bundle="${bundle}"/> </label>
-                <input id="ip1" class="form-control" type="text" name="operation_systemRec" required="required" pattern="^[a-zA-Z 0-9]+$"/>
+                <input id="ip1" class="form-control" type="text" name="operation_systemRec" required="required" pattern="^[a-zA-Z 0-9 \p{P}]+$" size="45"/>
             </div>
             <div class="col-md-6">
                 <label for="ip2" class="form-label"><fmt:message key="text.cpu_name" bundle="${bundle}"/> </label>
-                <input id="ip2" class="form-control" type="text" name="cpu_nameRec" required="required" pattern="^[a-zA-Z 0-9]+$"/>
+                <input id="ip2" class="form-control" type="text" name="cpu_nameRec" required="required" pattern="^[a-zA-Z 0-9 \p{P}]+$" size="45"/>
             </div>
             <div class="col-md-6">
                 <label for="ip3" class="form-label"><fmt:message key="text.cpu_freq" bundle="${bundle}"/> </label>
@@ -100,7 +100,7 @@
             </div>
             <div class="col-md-6">
                 <label for="ip5" class="form-label" for="adapterNameMin"><fmt:message key="text.video_adapter_name" bundle="${bundle}"/> </label>
-                <input id="ip5" class="form-control" type="text" name="video_adapter_nameRec" required="required" pattern="^[a-zA-Z 0-9]+$"/>
+                <input id="ip5" class="form-control" type="text" name="video_adapter_nameRec" required="required" pattern="^[a-zA-Z 0-9 \p{P}]+$" size="45"/>
             </div>
             <div class="col-md-6">
                 <label for="ip6" class="form-label"><fmt:message key="text.video_adapter_memory" bundle="${bundle}"/> </label>
