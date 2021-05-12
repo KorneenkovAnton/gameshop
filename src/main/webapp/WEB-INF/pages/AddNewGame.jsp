@@ -26,7 +26,7 @@
         </div>
         <div class="col-md-6">
             <label class="form-label" for="desc"><fmt:message key="text.cost" bundle="${bundle}"/> </label>
-            <input class="form-control" id="cost" type="text" name="cost" pattern="[0-9]{,3}"/>
+            <input class="form-control" id="cost" type="number" name="cost" pattern="[0-9]{,3}"/>
         </div>
         <div class="col-md-6">
             <label class="form-label" for="desc"><fmt:message key="text.release_date" bundle="${bundle}"/> </label>
