@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS `site_of_games`.`address` (
   `country` VARCHAR(45) NULL DEFAULT NULL,
   `city` VARCHAR(45) NULL DEFAULT NULL,
   `street` VARCHAR(45) NULL DEFAULT NULL,
-  `number_of_house` INT(11) NULL DEFAULT NULL,
+  `number_of_house` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC));
 

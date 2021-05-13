@@ -44,7 +44,7 @@ public class UserCreator implements Creator<User>, Constants {
         address.setCountry(request.getParameter(COUNTRY_COLUMN));
         address.setCity(request.getParameter(CITY_COLUMN));
         address.setStreet(request.getParameter(STREET_COLUMN));
-        address.setNumberOfHouse(Integer.parseInt(request.getParameter(NUMBER_COLUMN)));
+        address.setNumberOfHouse(request.getParameter(NUMBER_COLUMN));
         user.setAddress(address);
 
         return user;

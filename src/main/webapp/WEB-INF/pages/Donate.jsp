@@ -11,7 +11,7 @@
     <form action="/donate" method="post">
         <div class="row mb-3">
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="donate" placeholder="Currency" aria-label="City">
+                <input type="number" class="form-control" name="donate" placeholder="Currency" aria-label="City">
             </div>
         </div>
         <div>

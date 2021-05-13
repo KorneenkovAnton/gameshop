@@ -20,7 +20,7 @@ public class AddressDAOImpl implements DAO<Address>, Constants {
             preparedStatement.setString(1, address.getCountry());
             preparedStatement.setString(2, address.getCity());
             preparedStatement.setString(3, address.getStreet());
-            preparedStatement.setInt(4, address.getNumberOfHouse());
+            preparedStatement.setString(4, address.getNumberOfHouse());
             preparedStatement.executeUpdate();
             try (ResultSet generatedKey = preparedStatement.getGeneratedKeys()) {
                 if (generatedKey.next()) {
@@ -43,7 +43,7 @@ public class AddressDAOImpl implements DAO<Address>, Constants {
             preparedStatement.setString(1, address.getCountry());
             preparedStatement.setString(2, address.getCity());
             preparedStatement.setString(3, address.getStreet());
-            preparedStatement.setInt(4, address.getNumberOfHouse());
+            preparedStatement.setString(4, address.getNumberOfHouse());
             preparedStatement.setLong(5, address.getId());
             preparedStatement.executeUpdate();
             closePrepareStatement(preparedStatement);
@@ -70,7 +70,7 @@ public class AddressDAOImpl implements DAO<Address>, Constants {
             address.setCountry(resultSet.getString(COUNTRY_COLUMN));
             address.setCity(resultSet.getString(CITY_COLUMN));
             address.setStreet(resultSet.getString(STREET_COLUMN));
-            address.setNumberOfHouse(resultSet.getInt(NUMBER_COLUMN));
+            address.setNumberOfHouse(resultSet.getString(NUMBER_COLUMN));
         }
         closeResultSet(resultSet);
         closePrepareStatement(preparedStatement);
@@ -83,7 +83,7 @@ public class AddressDAOImpl implements DAO<Address>, Constants {
         preparedStatement.setString(1, address.getCountry());
         preparedStatement.setString(2, address.getCity());
         preparedStatement.setString(3, address.getStreet());
-        preparedStatement.setInt(4, address.getNumberOfHouse());
+        preparedStatement.setString(4, address.getNumberOfHouse());
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
             address.setId(resultSet.getLong(ID_COLUMN));

@@ -3,7 +3,7 @@ package com.epam.gameshop.entity;
 
 public class Address {
     private long id;
-    private int numberOfHouse;
+    private String numberOfHouse;
     private String country;
     private String city;
     private String street;
@@ -32,7 +32,7 @@ public class Address {
         this.street = street;
     }
 
-    public int getNumberOfHouse() {
+    public String getNumberOfHouse() {
         return numberOfHouse;
     }
 
@@ -44,11 +44,11 @@ public class Address {
         this.id = id;
     }
 
-    public void setNumberOfHouse(int numberOfHouse) {
+    public void setNumberOfHouse(String numberOfHouse) {
         this.numberOfHouse = numberOfHouse;
     }
 
-    public Address(long id, String country, String city, String street, int numberOfHouse) {
+    public Address(long id, String country, String city, String street, String numberOfHouse) {
         this.id = id;
         this.country = country;
         this.city = city;
