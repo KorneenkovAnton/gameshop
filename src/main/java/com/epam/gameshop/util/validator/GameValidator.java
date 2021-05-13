@@ -10,8 +10,6 @@ public class GameValidator implements Validator<Game> {
     public boolean isValid(Game game) {
         System.out.println(game);
         boolean answer = false;
-        System.out.println(validateString(game.getName(), STRING_REGEX));
-        System.out.println(validateString(game.getDeveloper(), STRING_REGEX));
         if (game != null && validateString(game.getName(), STRING_REGEX) && validateString(game.getDeveloper(), STRING_REGEX)) {
             answer = true;
         }
