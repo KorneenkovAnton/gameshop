@@ -8,7 +8,6 @@ public class GameValidator implements Validator<Game> {
 
     @Override
     public boolean isValid(Game game) {
-        System.out.println(game);
         boolean answer = false;
         if (game != null && validateString(game.getName(), STRING_REGEX) && validateString(game.getDeveloper(), STRING_REGEX)) {
             answer = true;
