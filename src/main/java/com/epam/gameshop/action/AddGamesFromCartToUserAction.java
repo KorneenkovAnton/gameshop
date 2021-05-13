@@ -16,7 +16,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-public class AddGamesFromCartToUserAction implements Action,Constants {
+public class AddGamesFromCartToUserAction implements Action, Constants {
     private final ConnectionPool pool;
     private final GameDAO gameDAO;
     private final UserDAO userDAO;
@@ -34,10 +34,10 @@ public class AddGamesFromCartToUserAction implements Action,Constants {
         List<Game> games = (List<Game>) session.getAttribute(CART_ATTRIBUTE);
         User user = (User) session.getAttribute(USER_ATTRIBUTE);
 
-        int gamesCostSum = games.stream().map(Game ::getCost).reduce(Integer::sum).orElse(0);
+        int gamesCostSum = games.stream().map(Game::getCost).reduce(Integer::sum).orElse(0);
 
         try {
-            if(user.getMoney() >= gamesCostSum) {
+            if (user.getMoney() >= gamesCostSum) {
                 connection.setAutoCommit(false);
                 for (Game game : games) {
                     gameDAO.addGameToUser(user, game, connection);
@@ -48,15 +48,15 @@ public class AddGamesFromCartToUserAction implements Action,Constants {
                 request.setAttribute(OPERATION_STATUS, OPERATION_SUCCESS);
                 request.setAttribute(USER_ATTRIBUTE, user);
                 connection.commit();
-            }else {
+            } else {
                 request.setAttribute(OPERATION_STATUS, NOT_ENOUGH_MONEY);
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
             connection.rollback();
-            request.setAttribute(OPERATION_STATUS,OPERATION_ERROR);
-            throw  new SQLException(e.getMessage());
-        }finally {
+            request.setAttribute(OPERATION_STATUS, OPERATION_ERROR);
+            throw new SQLException(e.getMessage());
+        } finally {
             pool.closeConnection(connection);
         }
 
