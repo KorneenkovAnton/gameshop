@@ -57,9 +57,11 @@
                         </tbody>
                     </table>
                 </div>
-                <form action="/buyGames" method="post">
-                    <input type="submit" class="btn-primary btn" value="Buy">
-                </form>
+                <c:if test="${cart != null}">
+                    <form action="/buyGames" method="post">
+                        <input type="submit" class="btn-primary btn" value="Buy">
+                    </form>
+                </c:if>
             </div>
         </div>
     </div>
