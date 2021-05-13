@@ -31,6 +31,7 @@ public class MainServlet extends HttpServlet implements Constants {
                 req.setAttribute(ERROR_MESSAGE, e.getMessage());
                 getServletContext().getRequestDispatcher(ERROR_JSP).forward(req, resp);
             } catch (Exception e) {
+                e.printStackTrace();
                 logger.error(e.getMessage());
                 logger.error(e.getStackTrace());
                 req.setAttribute(HTTPError, ERROR_500);

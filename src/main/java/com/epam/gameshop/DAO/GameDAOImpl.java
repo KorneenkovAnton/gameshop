@@ -154,7 +154,7 @@ public class GameDAOImpl implements GameDAO, Constants {
 
 
     private List<Game> getGameLIst(ResultSet resultSet) throws SQLException {
-        List<Game> games = null;
+        List<Game> games = new ArrayList<>();
         if (resultSet.next()) {
             games = new ArrayList<>();
             do {
