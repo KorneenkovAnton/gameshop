@@ -215,6 +215,14 @@ public interface Constants {
     String GET_FILE_BY_ID = "SELECT * FROM file WHERE id = ?";
     String ERROR_MESSAGE = "errorMessage";
     String AVAILABLE_FRIENDS = "availableFriends";
+    String SELECT_COMMENT_BY_GAME = "SELECT comment.*, user.name, user.sname FROM comment " +
+            "INNER JOIN user ON comment.user_id = user.id WHERE comment.game_id = ?";
+    String INSERT_INTO_COMMENT = "INSERT INTO comment(user_id,game_id,message) VALUES (?,?,?)";
+    String CREATE_DATE_COLUMN = "create_date";
+    String MESSAGE_COLUMN = "message";
+    String DATA_COLUMN = "data";
+    String MIME_TYPE_COLUMN = "mime_type";
+    String GAME_INFO_PARAMETER = "gameInfo";
 }
 
 

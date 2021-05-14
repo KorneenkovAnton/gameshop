@@ -44,8 +44,8 @@ public class ShowMyGamesAction implements Action, Constants {
                                     game.getMinimalSystemRequirements().getId(),connection));
                             game.setRecommendedSystemRequirements(systemRequirementsDAO.getById(
                                     game.getRecommendedSystemRequirements().getId(),connection));
-                        } catch (SQLException throwables) {
-                            throwables.printStackTrace();
+                        } catch (SQLException throwable) {
+                            throwable.printStackTrace();
                         }
                     })
                     .collect(Collectors.toList()));

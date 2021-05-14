@@ -28,18 +28,18 @@ public class AddNewCommentAction implements Action, Constants {
         Connection connection = pool.getConnection();
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(USER_ATTRIBUTE);
-        Game currentGame = (Game) session.getAttribute("gameInfo");
+        Game currentGame = (Game) session.getAttribute(GAME_INFO_PARAMETER);
 
         Comment comment = new Comment();
         comment.setUser(user);
-        comment.setMessage(request.getParameter("message"));
+        comment.setMessage(request.getParameter(MESSAGE_COLUMN));
         comment.setGameId(currentGame.getId());
 
         try {
             commentDAO.addToDatabase(comment, connection);
             currentGame.getComments().add(comment);
 
-            session.setAttribute("gameInfo", currentGame);
+            session.setAttribute(GAME_INFO_PARAMETER, currentGame);
         } catch (SQLException e) {
             e.printStackTrace();
             throw new SQLException(e.getMessage());

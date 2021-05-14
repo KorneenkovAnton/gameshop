@@ -36,7 +36,7 @@ public class ShowGameInfoPage implements Action, Constants {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws SQLException {
         Connection connection = pool.getConnection();
         HttpSession session = request.getSession();
-        Long gameId = Long.valueOf(request.getParameter("gameInfo"));
+        Long gameId = Long.valueOf(request.getParameter(GAME_INFO_PARAMETER));
 
         try {
             Game game = gameDAO.getById(gameId, connection);
@@ -47,7 +47,7 @@ public class ShowGameInfoPage implements Action, Constants {
             game.setPoster(fileDAO.getById(game.getPoster().getId(),connection));
             game.setComments(commentDAO.getByGame(gameId, connection));
 
-            session.setAttribute("gameInfo", game);
+            session.setAttribute(GAME_INFO_PARAMETER, game);
         } catch (SQLException e) {
             e.printStackTrace();
             throw new SQLException(e.getMessage());

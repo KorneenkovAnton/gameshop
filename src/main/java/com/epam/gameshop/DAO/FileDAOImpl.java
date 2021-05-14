@@ -51,9 +51,9 @@ public class FileDAOImpl implements DAO<Poster>, Constants {
         preparedStatement.setLong(1,id);
         ResultSet resultSet = preparedStatement.executeQuery();
         if(resultSet.next()) {
-            Blob blob = resultSet.getBlob("data");
-            poster.setId(resultSet.getLong("id"));
-            poster.setMimeType(resultSet.getString("mime_type"));
+            Blob blob = resultSet.getBlob(DATA_COLUMN);
+            poster.setId(resultSet.getLong(ID_COLUMN));
+            poster.setMimeType(resultSet.getString(MIME_TYPE_COLUMN));
             poster.setFile(blob.getBytes(1, (int) blob.length()));
             poster.setBase64file(Base64.getEncoder().encodeToString(poster.getFile()));
             blob.free();
