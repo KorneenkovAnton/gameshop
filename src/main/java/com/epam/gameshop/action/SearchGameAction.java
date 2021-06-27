@@ -7,6 +7,7 @@ import com.epam.gameshop.entity.SystemRequirements;
 import com.epam.gameshop.entity.User;
 import com.epam.gameshop.pool.ConnectionPool;
 import com.epam.gameshop.util.constants.Constants;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +18,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class SearchGameAction implements Action, Constants {
+
+    private static final Logger logger = Logger.getLogger(SearchGameAction.class);
+
     private final ConnectionPool pool;
     private final ResourceBundle rb;
     private final GameDAO gameDAO;
@@ -69,7 +73,8 @@ public class SearchGameAction implements Action, Constants {
 
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
+            logger.error(e.getStackTrace());
             throw new SQLException(e.getMessage());
         } finally {
             pool.closeConnection(connection);

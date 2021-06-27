@@ -3,6 +3,7 @@ package com.epam.gameshop.util.creator;
 import com.epam.gameshop.entity.Game;
 import com.epam.gameshop.entity.SystemRequirements;
 import com.epam.gameshop.util.constants.Constants;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
@@ -13,6 +14,7 @@ import java.util.Date;
 public class GameCreator implements Creator<Game>, Constants {
 
     private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private static final Logger logger = Logger.getLogger(GameCreator.class);
 
     @Override
     public Game create(HttpServletRequest request) {
@@ -24,7 +26,7 @@ public class GameCreator implements Creator<Game>, Constants {
             game.setReleaseDate(simpleDateFormat.parse(request.getParameter(RELEASE_DATE_COLUMN)));
         } catch (ParseException e) {
             game.setReleaseDate(new Date());
-            e.printStackTrace();
+            logger.warn(e.getMessage());
         }
         game.setDescription(request.getParameter(DESCRIPTION_COLUMN));
         game.setDeveloper(request.getParameter(DEVELOPER_COLUMN));

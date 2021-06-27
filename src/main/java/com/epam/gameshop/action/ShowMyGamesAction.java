@@ -7,6 +7,7 @@ import com.epam.gameshop.entity.SystemRequirements;
 import com.epam.gameshop.entity.User;
 import com.epam.gameshop.pool.ConnectionPool;
 import com.epam.gameshop.util.constants.Constants;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +17,9 @@ import java.sql.SQLException;
 import java.util.stream.Collectors;
 
 public class ShowMyGamesAction implements Action, Constants {
+
+    private static final Logger logger = Logger.getLogger(ShowMyGamesAction.class);
+
     private final ConnectionPool pool;
     private final GameDAO gameDAO;
     private final DAO<Poster> fileDAO;
@@ -51,7 +55,8 @@ public class ShowMyGamesAction implements Action, Constants {
                     .collect(Collectors.toList()));
             session.setAttribute(USER_ATTRIBUTE, user);
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
+            logger.error(e.getStackTrace());
             throw new SQLException(e.getMessage() + user.getId());
         } finally {
             pool.closeConnection(connection);

@@ -5,6 +5,7 @@ import com.epam.gameshop.DAO.UserFriendDAOImpl;
 import com.epam.gameshop.entity.User;
 import com.epam.gameshop.pool.ConnectionPool;
 import com.epam.gameshop.util.constants.Constants;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +15,9 @@ import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 
 public class AddFriendAction implements Action,Constants {
+
+    private static final Logger logger = Logger.getLogger(AddFriendAction.class);
+
     private final ConnectionPool pool;
     private final UserFriendDAO userFriendDAO;
 
@@ -41,11 +45,14 @@ public class AddFriendAction implements Action,Constants {
         }catch (SQLIntegrityConstraintViolationException e){
             connection.rollback();
             request.setAttribute(OPERATION_STATUS,OPERATION_WRONG_ID);
+            logger.error(e.getMessage());
+            logger.error(e.getStackTrace());
         } catch (SQLException e){
-            e.printStackTrace();
+            logger.error(e.getMessage());
+            logger.error(e.getStackTrace());
             connection.rollback();
             request.setAttribute(OPERATION_STATUS,OPERATION_ERROR);
-            throw  new SQLException(e.getMessage());
+            throw new SQLException(e.getMessage());
         }
         finally {
             pool.closeConnection(connection);

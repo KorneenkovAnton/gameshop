@@ -3,6 +3,7 @@ package com.epam.gameshop.util.creator;
 import com.epam.gameshop.entity.Address;
 import com.epam.gameshop.entity.User;
 import com.epam.gameshop.util.constants.Constants;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
@@ -12,6 +13,7 @@ import java.text.SimpleDateFormat;
 public class UserCreator implements Creator<User>, Constants {
 
     private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private static final Logger logger = Logger.getLogger(UserCreator.class);
 
     @Override
     public User create(HttpServletRequest request) {
@@ -21,7 +23,7 @@ public class UserCreator implements Creator<User>, Constants {
         try {
             user.setId(Long.parseLong(request.getParameter(ID_COLUMN)));
         }catch (NumberFormatException e){
-            System.out.println("new user");
+            logger.info("new user");
         }
 
         user.setName(request.getParameter(NAME_COLUMN));
@@ -31,14 +33,15 @@ public class UserCreator implements Creator<User>, Constants {
         try {
             user.setDateOfBirthday(simpleDateFormat.parse(request.getParameter(DATE_OF_BIRTHDAY_COLUMN)));
         } catch (ParseException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
+            logger.error(e.getStackTrace());
         }
         user.seteMail(request.getParameter(EMAIL_COLUMN));
 
         try {
             address.setId(Long.parseLong(request.getParameter("address_id")));
         }catch (NumberFormatException e){
-            System.out.println("new address");
+            logger.info("new address");
         }
 
         address.setCountry(request.getParameter(COUNTRY_COLUMN));

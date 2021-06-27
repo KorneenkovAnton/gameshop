@@ -5,6 +5,7 @@ import com.epam.gameshop.DAO.UserFriendDAOImpl;
 import com.epam.gameshop.entity.User;
 import com.epam.gameshop.pool.ConnectionPool;
 import com.epam.gameshop.util.constants.Constants;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +14,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class ShowAvailableFriendsAction implements Action, Constants {
+
+    private static final Logger logger = Logger.getLogger(ShowAvailableFriendsAction.class);
+
     private final ConnectionPool pool;
     private final UserFriendDAO userFriendDAO;
 
@@ -30,7 +34,8 @@ public class ShowAvailableFriendsAction implements Action, Constants {
         try {
             session.setAttribute(AVAILABLE_FRIENDS, userFriendDAO.getAllAvailableFriends(user,connection));
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
+            logger.error(e.getStackTrace());
             throw new SQLException(e.getMessage());
         } finally {
             pool.closeConnection(connection);

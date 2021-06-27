@@ -4,6 +4,7 @@ import com.epam.gameshop.DAO.UserDAOImpl;
 import com.epam.gameshop.entity.User;
 import com.epam.gameshop.pool.ConnectionPool;
 import com.epam.gameshop.util.constants.Constants;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +14,9 @@ import java.sql.SQLException;
 
 
 public class DonateAction implements Action, Constants {
+
+    private static final Logger logger = Logger.getLogger(DonateAction.class);
+
     private final ConnectionPool pool;
     private final UserDAOImpl userDAO;
 
@@ -34,7 +38,8 @@ public class DonateAction implements Action, Constants {
             session.setAttribute(USER_ATTRIBUTE, user);
             request.setAttribute(OPERATION_STATUS, OPERATION_SUCCESS);
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
+            logger.error(e.getStackTrace());
             request.setAttribute(OPERATION_STATUS, OPERATION_ERROR);
         } finally {
             pool.closeConnection(connection);

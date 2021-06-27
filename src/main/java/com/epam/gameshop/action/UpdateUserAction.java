@@ -13,6 +13,7 @@ import com.epam.gameshop.util.creator.UserCreator;
 import com.epam.gameshop.util.validator.AddressValidator;
 import com.epam.gameshop.util.validator.UserValidator;
 import com.epam.gameshop.util.validator.Validator;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +22,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class UpdateUserAction implements Action, Constants {
+
+    private static final Logger logger = Logger.getLogger(UpdateUserAction.class);
+
     private final ConnectionPool pool;
     private final UserDAO userDAOImpl;
     private final DAO<Address> addressDAO;
@@ -57,7 +61,8 @@ public class UpdateUserAction implements Action, Constants {
                 request.setAttribute(OPERATION_STATUS, OPERATION_SUCCESS);
             } catch (SQLException e) {
                 connection.rollback();
-                e.printStackTrace();
+                logger.error(e.getMessage());
+                logger.error(e.getStackTrace());
                 request.setAttribute(OPERATION_STATUS, OPERATION_ERROR);
                 throw new SQLException(e.getMessage());
             } finally {

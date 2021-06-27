@@ -2,6 +2,8 @@ package com.epam.gameshop.pool;
 
 
 import com.epam.gameshop.util.constants.Constants;
+import com.epam.gameshop.util.creator.UserCreator;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,6 +13,9 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 public class ConnectionPool implements Constants {
+
+    private static final Logger logger = Logger.getLogger(ConnectionPool.class);
+
     private final String URL;
     private final String USER;
     private final String PASSWORD;
@@ -56,8 +61,8 @@ public class ConnectionPool implements Constants {
             try {
                 pool.add(DriverManager.getConnection(URL, USER, PASSWORD));
             } catch (SQLException e) {
-                System.out.println("Connection failed...");
-                e.printStackTrace();
+                logger.error("Connection failed...");
+                logger.error(e.getMessage());
             }
         }
     }
@@ -68,8 +73,8 @@ public class ConnectionPool implements Constants {
                 pool.add(DriverManager.getConnection(rb.getString(URL_PROP), rb.getString(USER_ATTRIBUTE),
                         rb.getString(PASSWORD_PROP)));
             } catch (SQLException e) {
-                System.out.println("Connection failed...");
-                e.printStackTrace();
+                logger.error("Connection failed...");
+                logger.error(e.getMessage());
             }
         }
     }
@@ -80,7 +85,8 @@ public class ConnectionPool implements Constants {
         try {
             con = pool.take();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
+            logger.error(e.getStackTrace());
         }
         return con;
     }
@@ -91,7 +97,8 @@ public class ConnectionPool implements Constants {
             try {
                 pool.put(c);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
+                logger.error(e.getStackTrace());
             }
         }
     }

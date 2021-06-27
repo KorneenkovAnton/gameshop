@@ -11,6 +11,7 @@ import org.apache.commons.fileupload.FileUploadException;
 import com.epam.gameshop.pool.ConnectionPool;
 import com.epam.gameshop.util.constants.Constants;
 import com.epam.gameshop.util.uploader.Uploader;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +21,9 @@ import java.sql.SQLException;
 
 
 public class AddNewGameAction implements Action, Constants {
+
+    private static final Logger logger = Logger.getLogger(AddNewGameAction.class);
+
     private final ConnectionPool pool;
     private final GameDAO gameDAO;
     private final DAO<SystemRequirements> systemRequirementsDAO;
@@ -48,11 +52,13 @@ public class AddNewGameAction implements Action, Constants {
             request.setAttribute(OPERATION_STATUS, OPERATION_SUCCESS);
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
+            logger.error(e.getStackTrace());
             request.setAttribute(OPERATION_STATUS, OPERATION_ERROR);
             throw new SQLException(e.getMessage());
         } catch (FileUploadException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
+            logger.error(e.getStackTrace());
             request.setAttribute(OPERATION_STATUS, OPERATION_ERROR);
         } finally {
             pool.closeConnection(connection);

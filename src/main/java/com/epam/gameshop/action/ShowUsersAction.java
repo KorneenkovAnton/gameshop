@@ -8,6 +8,7 @@ import com.epam.gameshop.entity.Address;
 import com.epam.gameshop.entity.User;
 import com.epam.gameshop.pool.ConnectionPool;
 import com.epam.gameshop.util.constants.Constants;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +18,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class ShowUsersAction implements Action, Constants {
+
+    private static final Logger logger = Logger.getLogger(ShowUsersAction.class);
+
     private final ConnectionPool pool;
     private final UserDAO userDAO;
     private final DAO<Address> addressDAO;
@@ -45,7 +49,8 @@ public class ShowUsersAction implements Action, Constants {
             session.setAttribute(USERS_ATTRIBUTE, users);
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
+            logger.error(e.getStackTrace());
             throw new SQLException(e.getMessage());
         } finally {
             pool.closeConnection(connection);

@@ -9,7 +9,6 @@ import com.epam.gameshop.util.validator.GameValidator;
 import com.epam.gameshop.util.validator.SystemReqValidator;
 import com.epam.gameshop.util.validator.Validator;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,6 +16,7 @@ import java.sql.SQLException;
 
 
 public class CreateNewGameAction implements Action, Constants {
+
     private final Creator<Game> creator;
     private final Validator<Game> validatorGame;
     private final Validator<SystemRequirements> validatorSys;
