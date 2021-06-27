@@ -12,7 +12,6 @@ public class Game {
     private String description;
     private String name;
     private String developer;
-   // private String posterLink;
     private Poster poster;
     private SystemRequirements minimalSystemRequirements;
     private SystemRequirements recommendedSystemRequirements;
