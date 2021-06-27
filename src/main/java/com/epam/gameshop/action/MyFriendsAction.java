@@ -34,7 +34,7 @@ public class MyFriendsAction implements Action, Constants {
         try {
             user.setFriends(userFriendDAO.selectAllFriendsOfUser(user, connection));
             session.setAttribute(USER_ATTRIBUTE, user);
-            request.setAttribute(STATUS, 1);
+            request.setAttribute(STATUS, 1); // 1 - jsp страница с добавленными друзьями(видна кнопка удаления из друзей)
         } catch (SQLException e) {
             logger.error(e.getMessage());
             logger.error(e.getStackTrace());

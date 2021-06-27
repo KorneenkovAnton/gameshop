@@ -45,7 +45,7 @@ public class ShowMyFriendRequestsAction implements Action, Constants {
         }
 
         session.setAttribute(USER_ATTRIBUTE, user);
-        request.setAttribute(STATUS, 0);
+        request.setAttribute(STATUS, 0);// 0 - jsp страница с запросами в друзья(видны кнопки добавления или удаления запроса)
 
         return USER_FRIENDS_JSP;
     }
