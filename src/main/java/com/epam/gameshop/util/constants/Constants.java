@@ -200,6 +200,7 @@ public interface Constants {
     //Uploader
     String PROPERTIES_NAME = "info";
     String PASSWORD_PROP = "password";
+    String COUNT_OF_CONNECTION_PROP = "count_of_connections";
     String URL_PROP = "url";
     String POSTER_DIR = "posters_dir";
     String POSTERS_FOLDER = "/posters/";

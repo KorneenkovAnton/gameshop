@@ -26,10 +26,10 @@ public class ConnectionPool implements Constants {
 
     {
         rb = ResourceBundle.getBundle(PROPERTIES_NAME);
-        URL = "jdbc:mysql://localhost:3306/site_of_games?useUnicode=true&characterEncoding=utf8";
-        USER = "root";
-        PASSWORD = "1234";
-        COUNT_OF_CONNECTIONS = 4;
+        URL = rb.getString(URL_PROP);
+        USER = rb.getString(USER_ATTRIBUTE);
+        PASSWORD = rb.getString(PASSWORD_PROP);
+        COUNT_OF_CONNECTIONS = Integer.parseInt(rb.getString(COUNT_OF_CONNECTION_PROP));
         pool = new ArrayBlockingQueue<>(COUNT_OF_CONNECTIONS);
     }
 
@@ -45,37 +45,18 @@ public class ConnectionPool implements Constants {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
 
-            if (rb.getKeys().hasMoreElements()) {
-                createPoolWithBundle();
-            } else {
-                createPoolWithConstants();
+            for (int i = 0; i < COUNT_OF_CONNECTIONS; i++) {
+                try {
+                    pool.add(DriverManager.getConnection(URL, USER, PASSWORD));
+                } catch (SQLException e) {
+                    logger.error("Connection failed...");
+                    logger.error(e.getMessage());
+                }
             }
 
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void createPoolWithConstants() {
-        for (int i = 0; i < COUNT_OF_CONNECTIONS; i++) {
-            try {
-                pool.add(DriverManager.getConnection(URL, USER, PASSWORD));
-            } catch (SQLException e) {
-                logger.error("Connection failed...");
-                logger.error(e.getMessage());
-            }
-        }
-    }
-
-    private void createPoolWithBundle() {
-        for (int i = 0; i < Integer.parseInt(rb.getString("count_of_connections")); i++) {
-            try {
-                pool.add(DriverManager.getConnection(rb.getString(URL_PROP), rb.getString(USER_ATTRIBUTE),
-                        rb.getString(PASSWORD_PROP)));
-            } catch (SQLException e) {
-                logger.error("Connection failed...");
-                logger.error(e.getMessage());
-            }
+            logger.error(e.getMessage());
+            logger.error(e.getStackTrace());
         }
     }
 
