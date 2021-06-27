@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class MainServlet extends HttpServlet implements Constants {
-
-    private static final Logger logger = Logger.getLogger(MainServlet.class);
-
+    
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Action action = AbstractActionFactory.getInstance().getAction(req, resp);
