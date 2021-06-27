@@ -5,7 +5,7 @@
          version="3.1">
     <servlet>
         <servlet-name>MainServlet</servlet-name>
-        <servlet-class>com.epam.gameshop.servlet.MainServlet</servlet-class>
+        <servlet-class>com.epam.gameshop.servlet.GameShopMainServlet</servlet-class>
     </servlet>
     <filter>
         <filter-name>EncodingFilter</filter-name>
