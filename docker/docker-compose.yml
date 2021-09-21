@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+
+  gameshop-db:
+    container_name: gamesho-db
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    volumes:
+      - gameshop-data:/var/lib/mysql
+      - ../database/create_db_script.sql:/docker-entrypoint-initdb.d/create.sql:ro
+      - ../database/dump.sql:/docker-entrypoint-initdb.d/dump.sql:ro
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: site_of_games
+    networks:
+      - epam-net
+
+  gameshop:
+    container_name: gameshop
+    build:
+      context: ../
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - epam-net
+    depends_on:
+      - gameshop-db
+
+volumes:
+  gameshop-data:
+
+networks:
+  epam-net:
