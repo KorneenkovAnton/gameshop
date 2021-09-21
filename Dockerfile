@@ -6,7 +6,7 @@ COPY .mvn .mvn
 COPY pom.xml .
 COPY src src
 
-RUN sed -i "s|localhost|gameshop-db|g" src/main/resources/info.properties
+RUN sed -i "s|localhost:3306|gameshop-db:3306|g" src/main/resources/info.properties
 RUN ./mvnw install -DskipTests
 
 #STAGE 2: deploy
